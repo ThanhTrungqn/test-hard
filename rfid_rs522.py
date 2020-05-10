@@ -32,19 +32,24 @@ class RFID_CR522U:
 	MifareUltraLightWrite = 0x0213;
 
 	def __init__ (self, dev='/dev/ttyUSB0'):
-		self.ser = serial.Serial(dev, 19200, timeout=1, serial.EIGHTBITS, serial.PARITY_NONE, serial.STOPBITS_ONE);
+		self.ser = serial.Serial(dev, 19200, timeout=1, serial.EIGHTBITS, serial.PARITY_NONE, serial.STOPBITS_ONE)
 		#self.ser = serial.Serial(dev, 19200, timeout=1, );	#Init UART 19200,8,N,1 ,  time out 1s
 		# ( port , 19200, timeout=1, parity=serial.PARITY_EVEN, rtscts=1);
 
 
 	def CR522_BuzzerBeep (self):
-		values = bytearray([0xaa, 0xbb , 0x06 , 0x00 0x00 , 0x00 , 0x07 , 0x01 ,0x03 ,0x05]);
-		ser.write(values);
+		values = bytearray([0xaa, 0xbb , 0x06 , 0x00 0x00 , 0x00 , 0x07 , 0x01 ,0x03 ,0x05])
+		self.ser.write(values)
 		#need read for verify?
 
 	def CR522_LEDGREEN_ON (self):
+		pass
 
 	def CR522_LEDGREEN_OFF (self):	#Need Test
-		values = bytearray([0xaa, 0xbb , 0x06 , 0x00 0x00 , 0x00 , 0x07 , 0x01 ,0x03 ,0x05]);
-		ser.write(values);
+		values = bytearray([0xaa, 0xbb , 0x06 , 0x00 0x00 , 0x00 , 0x07 , 0x01 ,0x03 ,0x05])
+		self.ser.write(values)
 		#need read for verify?
+
+test_rfid = RFID_CR522U()
+test_rfid.CR522_BuzzerBeep()
+
